@@ -1,0 +1,157 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* Azul-marinho (cor principal) */
+  --color-navy-50: #f1f5fb;
+  --color-navy-100: #dfe8f5;
+  --color-navy-200: #bccde6;
+  --color-navy-300: #8aa6cf;
+  --color-navy-400: #5b7cb1;
+  --color-navy-500: #3c5c93;
+  --color-navy-600: #2c4677;
+  --color-navy-700: #1f3460;
+  --color-navy-800: #142548;
+  --color-navy-900: #0b1a36;
+  --color-navy-950: #060f22;
+
+  /* Turquesa (cor de destaque) */
+  --color-teal-50: #ecfdfb;
+  --color-teal-100: #cffaf4;
+  --color-teal-200: #9ff2e8;
+  --color-teal-300: #5fe4d6;
+  --color-teal-400: #22d3c5;
+  --color-teal-500: #0fb5aa;
+  --color-teal-600: #0b918a;
+  --color-teal-700: #0e7370;
+
+  --animate-msg-in: msg-in 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+
+  @keyframes msg-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply bg-white font-sans text-navy-900 antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight;
+  }
+  a,
+  button {
+    @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-400;
+  }
+  ::selection {
+    @apply bg-teal-200 text-navy-950;
+  }
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-400;
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold tracking-[0.14em] text-teal-700 uppercase;
+  }
+  .btn-primary {
+    @apply btn bg-teal-400 text-navy-950 hover:bg-teal-300 active:bg-teal-500;
+  }
+  .btn-dark {
+    @apply btn bg-navy-900 text-white hover:bg-navy-800 active:bg-navy-950;
+  }
+  .btn-outline {
+    @apply btn border border-navy-200 bg-white text-navy-900 hover:border-navy-300 hover:bg-navy-50;
+  }
+  .btn-ghost-light {
+    @apply btn border border-white/20 bg-white/5 text-white hover:border-white/40 hover:bg-white/10;
+  }
+  .card {
+    @apply rounded-2xl border border-navy-100 bg-white shadow-[0_1px_2px_rgba(11,26,54,0.05)];
+  }
+  .field {
+    @apply w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white placeholder:text-navy-300 transition-colors focus:border-teal-400 focus:bg-white/[0.07] focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400/40;
+  }
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-lg focus:bg-teal-400 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-navy-950 focus:outline-none;
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+}
+
+/* Revelação suave ao rolar */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.typing-dot {
+  animation: typing 1.2s infinite ease-in-out;
+}
+.typing-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.typing-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes typing {
+  0%,
+  60%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

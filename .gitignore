@@ -1,0 +1,13 @@
+node_modules
+dist
+*.local
+*.tsbuildinfo
+
+.vercel
+.env*
+!.env.example
+
+# Ferramentas locais de desenvolvimento (não fazem parte do projeto)
+.claude/
+.mcp.json
+.playwright-mcp/
